@@ -14,9 +14,26 @@ After cloning the repository, navigate to the project's folder and run the comma
 
 ## Setup
 
-Create an [application.yml](https://github.com/freyacodes/lavalink/blob/master/LavalinkServer/application.yml.example) in the root directory of the project.
+Create an [application.yml](https://github.com/freyacodes/lavalink/blob/master/LavalinkServer/application.yml.example) file in the root directory of the project.
 
 Download the latest Lavalink jar from [here](https://github.com/Cog-Creators/Lavalink-Jars/releases) and place it in the project's root directory (same directory as application.yml).
+
+### PostgreSQL
+#### Windows
+Download from [the official site](https://www.postgresql.org/download/).
+
+#### Linux
+Either from the official site or follow the tutorial for your [distro](https://www.digitalocean.com/community/tutorial_collections/how-to-install-and-use-postgresql).
+
+#### MacOS
+Get [brew](https://brew.sh), then enter 'brew install postgresql'.
+
+Create a `.env` file in the root directory of the project and copy the contents of `.env.example` to it. Change 'john' and 'doe' to the name of your OS's user.
+
+## Important
+After you're done installing all the dependencies and entering all tokens and env variables, run ```npx prisma migrate dev```
+
+### Lavalink startup
 
 **Before running ```node index.js```, make sure to open a separate terminal in the root directory and run ```java -jar LavaLink.jar```**
 
@@ -32,10 +49,14 @@ This is the minimum amount of settings that need to be set for the core part (mu
 
 ```json
 {
-  "client_id": "the-bots-discord-id",
+  "client_id": "the-bots-client-id",
+  "client_secret": "the-bots-client-secret",
   "token": "Your-Bot-Token",
   "lava_host": "0.0.0.0",
   "lava_pass": "youshallnotpass",
+  "lava_port": 2333,
+  "lava_secure": false,
+  "invite_url": "discord-bot-invite",
   "spotify_client_id": "get-it-from-spotify-dev",
   "spotify_client_secret": "get-it-from-spotify-dev"
 }
@@ -57,59 +78,72 @@ For full command support, including lyrics, GIFs, news, and others, - (which som
 
 NOTE: When setting `"invite": true`, remember to enable the Public Bot option in the [Discord Developer Portal](https://discordapp.com/developers/applications/).
 
-## Commands
+# Commands
+A full list of commands for use with Master Bot
 
-### Music
+## Music
 
 | Command               | Description                                                                                                               | Usage                                                             |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| /play                 | Play any song or playlist from youtube, you can do it by searching for a song by name or song url or playlist url         | !play darude sandstorm                                            |
-| /pause                | Pause the current playing song                                                                                            | !pause                                                            |
-| /resume               | Resume the current paused song                                                                                            | !resume                                                           |
-| /leave                | Leaves voice channel if in one                                                                                            | !leave                                                            |
-| /remove               | Remove a specific song from queue by its number in queue                                                                  | !remove 4                                                         |
-| /queue                | Display the song queue                                                                                                    | !queue                                                            |
-| /shuffle              | Shuffle the song queue                                                                                                    | !shuffle                                                          |
-| /skip                 | Skip the current playing song                                                                                             | !skip                                                             |
-| /skipall              | Skip all songs in queue                                                                                                   | !skipall                                                          |
-| /skipto               | Skip to a specific song in the queue, provide the song number as an argument                                              | !skipto 5                                                         |
-| /volume               | Adjust song volume                                                                                                        | !volume 80                                                        |
-| /music-trivia         | Engage in a music trivia with your friends. You can add more songs to the trivia pool in resources/music/musictrivia.json | !music-trivia                                                     |
-| /loop                 | Loop the currently playing song or queue                                                                                           | !loop                                                           |                                                   |
-| /lyrics               | Get lyrics of any song or the lyrics of the currently playing song                                                        | !lyrics song-name                                                 |
-| /now-playing          | Display the current playing song with a playback bar                                                                      | !now-playing                                                      |
-| /move                 | Move song to a desired position in queue                                                                                  | !move 8 1                                                         |
-| /queue-historu              | Display the queue history                                                                                                 | !queue-history                                                          |
+| /play                 | Play any song or playlist from youtube, you can do it by searching for a song by name or song url or playlist url         | /play darude sandstorm                                            |
+| /pause                | Pause the current playing song                                                                                            | /pause                                                            |
+| /resume               | Resume the current paused song                                                                                            | /resume                                                           |
+| /leave                | Leaves voice channel if in one                                                                                            | /leave                                                            |
+| /remove               | Remove a specific song from queue by its number in queue                                                                  | /remove 4                                                         |
+| /queue                | Display the song queue                                                                                                    | /queue                                                            |
+| /shuffle              | Shuffle the song queue                                                                                                    | /shuffle                                                          |
+| /skip                 | Skip the current playing song                                                                                             | /skip                                                             |
+| /skipall              | Skip all songs in queue                                                                                                   | /skipall                                                          |
+| /skipto               | Skip to a specific song in the queue, provide the song number as an argument                                              | /skipto 5                                                         |
+| /volume               | Adjust song volume                                                                                                        | /volume 80                                                        |
+| /music-trivia         | Engage in a music trivia with your friends. You can add more songs to the trivia pool in resources/music/musictrivia.json | /music-trivia                                                     |
+| /loop                 | Loop the currently playing song or queue                                                                                           | /loop                                                           |                                                   |
+| /lyrics               | Get lyrics of any song or the lyrics of the currently playing song                                                        | /lyrics song-name                                                 |
+| /now-playing          | Display the current playing song with a playback bar                                                                      | /now-playing                                                      |
+| /move                 | Move song to a desired position in queue                                                                                  | /move 8 1                                                         |
+| /queue-history              | Display the queue history                                                                                                 | /queue-history                                                          |
+| /create-playlist              | Create a custom playlist                                                                                                 | /create-playlist 'playlistname'                                                          |
+| /save-to-playlist              | Add a song or playlist to a custom playlist                                                                                                 | /save-to-playlist 'playlistname' 'yt or spotify url'                                                          |
+| /remove-from-playlist              | Remove a track from a custom playlist                                                                                                 | /remove-from-playlist 'playlistname' 'track location'                                                          |
+| /my-playlists              | Display your custom playlists                                                                                                 | /my-playlists                                                          |
+| /display-playlist              | Display a custom playlist                                                                                                 | /display-playlist 'playlistname'                                                          |
+| /delete-playlist              | remove a custom playlist                                                                                                 | /delete-playlist 'playlistname'                                                          |
 
-### Other
+## Gifs 
 
 | Command           | Description                                                                                                                                                        | Usage                                                                        |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| /cat              | Get a cute cat picture                                                                                                                                             | !cat                                                                         |
-| /dog              | Get a cute dog picture                                                                                                                                             | !dog                                                                         |
-| /fortune          | Get a fortune cookie tip                                                                                                                                           | !fortune                                                                     |
-| /insult           | Generate an evil insult                                                                                                                                            | !insult                                                                      |
-| /chucknorris      | Get a satirical fact about Chuck Norris                                                                                                                            | !chucknorris                                                                 |
-| /motivation       | Get a random motivational quote                                                                                                                                    | !motivation                                                                  |
-| /world-news       | Latest headlines from reuters, you can change the news source to whatever news source you want, just change the source in line 13 in world-news.js or ynet-news.js | !world-news                                                                  |
-| /random           | Generate a random number between two provided numbers                                                                                                              | !random 0 100                                                                |                                                       |                                                    
-| /translate        | Translate to any language using Google translate.(only supported languages)                                                                                        | !translate english ありがとう                                                |
-| /about            | Info about me and the repo                                                                                                                                         | !about                                                                       |
-| /8ball            | Get the answer to anything!                                                                                                                                        | !8ball Is this bot awesome?                                                  |
-| /rps              | Rock Paper Scissors                                                                                                                                                | !rps                                                                         |
-| /bored            | Generate a random activity!                                                                                                                                        | !bored                                                                       |
-| /advice           | Get some advice!                                                                                                                                                   | !advice                                                                      |
-| /kanye            | Get a random Kanye quote                                                                                                                                           | !kanye                                                                       |
-| /urban dictionary | Get definitions from urban dictionary                                                                                                                              | !urban javascript                                                            |
+| /gif              | Get a random gif                                                                                                                                             | /gif                                                                         |
+| /jojo              | Get a random jojo gif                                                                                                                                             | /jojo                                                                         |
+| /gintama              | Get a random gintama gif                                                                                                                                             | /gintama                                                                         |
+| /anime              | Get a random anime gif                                                                                                                                             | /anime                                                                         |
+| /baka              | Get a random baka gif                                                                                                                                             | /baka                                                                         |
+| /cat              | Get a cute cat picture                                                                                                                                             | /cat                                                                         |
+| /doggo              | Get a cute dog picture                                                                                                                                             | /doggo                                                                         |
+| /hug              | Get a random hug gif                                                                         | /hug                                                                         |
+| /slap              | Get a random slap gif                                                                         | /slap                                                                         |
+| /pat              | Get a random pat gif                                                                         | /pat                                                                         |
+| /triggered              | Get a random triggered gif                                                                         | /triggered                                                                         |
+| /amongus              | Get a random Among Us gif                                                                         | /amongus                                                                         |
 
-### GIFs
+## Other
 
-| Command   | Description                         | Usage                   |
-| --------- | ----------------------------------- | ----------------------- |
-| /animegif | Get an anime related gif by a query | !animegif one punch man |
-| /gif      | Get any gif by a query              | !gif labrador           |
-| /gintama  | Replies with a random gintama gif   | !gintama                |
-| /jojo     | Replies with a random jojo gif      | !jojo                   |
+| Command           | Description                                                                                                                                                        | Usage                                                                        |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| /fortune          | Get a fortune cookie tip                                                                                                                                           | /fortune                                                                     |
+| /insult           | Generate an evil insult                                                                                                                                            | /insult                                                                      |
+| /chucknorris      | Get a satirical fact about Chuck Norris                                                                                                                            | /chucknorris                                                                 |
+| /motivation       | Get a random motivational quote                                                                                                                                    | /motivation                                                                  |
+| /random           | Generate a random number between two provided numbers                                                                                                              | /random 0 100                                                                |                                                       |                                                    
+| /8ball            | Get the answer to anything!                                                                                                                                        | /8ball Is this bot awesome?                                                  |
+| /rps              | Rock Paper Scissors                                                                                                                                                | /rps                                                                         |
+| /bored            | Generate a random activity!                                                                                                                                        | /bored                                                                       |
+| /advice           | Get some advice!                                                                                                                                                   | /advice                                                                      |
+| /kanye            | Get a random Kanye quote                                                                                                                                           | /kanye                                                                       |
+| /world-news       | Latest headlines from reuters, you can change the news source to whatever news source you want, just change the source in line 13 in world-news.js or ynet-news.js | /world-news                                                                  |
+| /translate        | Translate to any language using Google translate.(only supported languages)                                                                                        | /translate english ありがとう                                                |
+| /about            | Info about me and the repo                                                                                                                                         | /about                                                                       |
+| /urban dictionary | Get definitions from urban dictionary                                                                                                                              | /urban javascript                                                            |
 
 ## Resources
 
@@ -127,6 +161,12 @@ NOTE: When setting `"invite": true`, remember to enable the Public Bot option in
 
 [Installing on a Raspberry Pi](https://github.com/galnir/Master-Bot/wiki/Running-the-bot-on-a-Raspberry-Pi)
 
+[Using a Repl.it LavaLink server](https://github.com/galnir/Master-Bot/wiki/Setting-Up-LavaLink-with-a-Replit-server)
+
+[Using a public LavaLink server](https://github.com/galnir/Master-Bot/wiki/Setting-Up-LavaLink-with-a-public-LavaLink-Server)
+
+[Using an Internal LavaLink server](https://github.com/galnir/Master-Bot/wiki/Setting-up-LavaLink-with-an-Internal-LavaLink-server)
+
 ## Contributing
 
 Fork it and submit a pull request!
@@ -137,6 +177,8 @@ Anyone is welcome to suggest new features and improve code quality!
 [Bacon Fixation](https://github.com/Bacon-Fixation) - 'connect4', 'tic-tac-toe', 'game-search', 'google-translate', 'speedrun' commands, 'invite', 'vote', 'poll', 'welcome', 'mute', 'unmute', 'twitchstatus', 'twitch-announcer', 'welcome-message', 'tv-show-search', pi instructions and visual updates
 
 [ModoSN](https://github.com/ModoSN) - 'resolve-ip', 'rps', '8ball', 'bored', 'trump', 'advice', 'kanye', 'urban dictionary' commands and visual updates
+
+[PhantomNimbi](https://github.com/PhantomNimbi) - bring back gif commands, lavalink config tweaks
 
 [Natemo6348](https://github.com/Natemo6348) - 'mute', 'unmute'
 

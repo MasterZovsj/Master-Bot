@@ -6,9 +6,9 @@ import {
 import type { NewsChannel, TextChannel, ThreadChannel } from 'discord.js';
 import { Player } from 'lavaclient';
 import * as data from './config.json';
-import { Queue } from './lib/queue/Queue';
-import type { Song } from './lib/queue/Song';
-import { TriviaQueue } from './lib/trivia/TriviaQueue';
+import { Queue } from './lib/utils/queue/Queue';
+import type { Song } from './lib/utils/queue/Song';
+import { TriviaQueue } from './lib/utils/trivia/TriviaQueue';
 import { ExtendedClient } from './structures/ExtendedClient';
 
 load({
@@ -21,8 +21,12 @@ load({
 
 const client = new ExtendedClient();
 
-client.on('ready', () => {
+client.on('ready', async () => {
   client.music.connect(client.user!.id);
+  client.user?.setActivity('/', {
+    type: 'WATCHING'
+  });
+  client.user?.setStatus('online');
 });
 
 export type MessageChannel = TextChannel | ThreadChannel | NewsChannel | null;
