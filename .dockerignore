@@ -1,15 +1,22 @@
-# Docker files
- Dockerfile
- docker-compose.yml
- .dockerignore
+# Nextjs Files
+.next
 
- # Git files
- .git
- .github
- .gitignore
- LICENSE
- README.md
+# Docker Files
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+.dockerignore
 
- # Node modules and lint settings
- node_modules
- .prettierrc
+# Git Files
+.git
+.github
+.gitignore
+LICENSE
+README.md
+
+# Node Modules and lint settings
+node_modules
+.prettierrc
+dist
+logs
+Lavalink.jar
